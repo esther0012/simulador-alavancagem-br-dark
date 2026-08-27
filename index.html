@@ -1271,9 +1271,11 @@ function submitLead(lead){
         try { history.pushState({}, '', newRoute); } catch(e){ console.warn('[Router] pushState indisponivel:', e.message); }
         try { trackPageview(location.protocol === 'file:' ? newRoute : location.pathname); } catch(e){}
 
-        try { trackLeadSignup(leadId, { content_name:'quiz_lead', profile: result.profile }); }
-        catch(e){ console.error('[Meta Pixel] Lead no resultado falhou:', e); }
-      
+        if (window.fbq){
+          window.fbq('trackCustom','Lead', { rota: newRoute, aprovado: qualified });
+          console.log('[Meta Pixel] cadastro enviado:', newRoute);
+        }
+
         if (qualified) renderApproved(); else renderAnalysis();
     }
 
