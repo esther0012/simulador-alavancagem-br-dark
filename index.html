@@ -1275,7 +1275,6 @@ function submitLead(lead){
           window.fbq('trackCustom','Lead', { rota: newRoute, aprovado: qualified });
           console.log('[Meta Pixel] cadastro enviado:', newRoute);
         }
-
         if (qualified) renderApproved(); else renderAnalysis();
     }
 
